@@ -3,16 +3,20 @@
     <nav-bar class="home-bar">
       <div slot="center">购物街</div>
     </nav-bar>
+    <home-swiper v-bind:probanner="banner"></home-swiper>
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar'
+import HomeSwiper from './childcompos/HomeSwiper'
+
 import {getHomeMultidata} from 'network/home'
 
 export default {
   components:{
-    NavBar
+    NavBar,
+    HomeSwiper 
   },
   data(){
     return {
