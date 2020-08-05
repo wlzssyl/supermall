@@ -13,7 +13,7 @@ export default {
 <style>
   .tabbar{
     display: flex;
-    position: absolute;
+    position: fixed;
     text-align: center;
     height: 49px;
     left: 0;
