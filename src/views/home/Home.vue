@@ -5,6 +5,7 @@
     </nav-bar>
     <home-swiper v-bind:probanner="banner"></home-swiper>
     <home-recommend :recommend="recommend"></home-recommend>
+    <home-ad></home-ad>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import NavBar from 'components/common/navbar/NavBar'
 import HomeSwiper from './childcompos/HomeSwiper'
 import HomeRecommend from './childcompos/HomeRecommend'
+import HomeAd from './childcompos/HomeAd'
 
 import {getHomeMultidata} from 'network/home'
 
@@ -19,7 +21,8 @@ export default {
   components:{
     NavBar,
     HomeSwiper,
-    HomeRecommend
+    HomeRecommend,
+    HomeAd
   },
   data(){
     return {
