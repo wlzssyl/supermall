@@ -71,7 +71,7 @@ import HomeAd from './childcompos/HomeAd'
 import NavBar from 'components/common/navbar/NavBar'
 import TabControl from 'components/content/TabControl'
 
-import {getHomeMultidata} from 'network/home'
+import {getHomeMultidata, getHomeGoods} from 'network/home'
 
 export default {
   components:{
@@ -85,15 +85,39 @@ export default {
     return {
       results:null,
       banner:[],
-      recommend:[]
+      recommend:[],
+      //商品数据
+      goods:{
+        pop:{page:0, list:[]},
+        new:{page:0, list:[]},
+        sell:{page:0, list:[]}
+      }
     }
   },
   created(){
-    getHomeMultidata().then(res => {
-      this.results = res;
-      this.banner = res.data.data.banner.list;
-      this.recommend = res.data.data.recommend.list;
-    })
+    //获取home页主要数据
+    this.MgetHomeMultidata();
+    //获取home页商品数据
+    this.MgetHomeGoods('pop');
+    this.MgetHomeGoods('new');
+    this.MgetHomeGoods('sell');
+  },
+  methods:{
+    MgetHomeMultidata() {
+      getHomeMultidata().then(res => {
+        this.results = res;
+        this.banner = res.data.data.banner.list;
+        this.recommend = res.data.data.recommend.list;
+      }).catch(err => console.log(err));
+    },
+    MgetHomeGoods(type) {
+      const page = ++this.goods[type].page;
+      getHomeGoods(type, page).then(res => {
+        console.log(res.data);
+        this.goods[type].list.push(...res.data.data.list);
+        //这里的.push(...[]) 解构
+      })
+    }
   }
 }
 </script>

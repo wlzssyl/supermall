@@ -34,13 +34,13 @@ export default {
   .tab-control{
     display: flex;
     justify-content: space-around;
-    line-height: 40px;
+    line-height: 45px;
     background-color: #fff;
     position: sticky;
     top: 0;
   }
   .tab-control span{
-    padding: 4px;
+    padding: 6px;
   }
   .tab-control-item{
     font-size: 16px;
