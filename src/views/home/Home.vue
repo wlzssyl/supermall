@@ -7,59 +7,9 @@
     <home-recommend :recommend="recommend"></home-recommend>
     <home-ad></home-ad>
     <tab-control :name="['流行','新款','精选']"></tab-control>
+    <home-goods :list="goods.pop.list"></home-goods>
 
-  <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
+ 
   </div>
 </template>
 
@@ -70,6 +20,7 @@ import HomeAd from './childcompos/HomeAd'
 
 import NavBar from 'components/common/navbar/NavBar'
 import TabControl from 'components/content/TabControl'
+import HomeGoods from 'components/content/homegoods/HomeGoods'
 
 import {getHomeMultidata, getHomeGoods} from 'network/home'
 
@@ -79,7 +30,8 @@ export default {
     HomeRecommend,
     HomeAd,
     NavBar,
-    TabControl
+    TabControl,
+    HomeGoods
   },
   data(){
     return {
@@ -113,7 +65,6 @@ export default {
     MgetHomeGoods(type) {
       const page = ++this.goods[type].page;
       getHomeGoods(type, page).then(res => {
-        console.log(res.data);
         this.goods[type].list.push(...res.data.data.list);
         //这里的.push(...[]) 解构
       })

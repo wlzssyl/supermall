@@ -38,6 +38,7 @@ export default {
     background-color: #fff;
     position: sticky;
     top: 0;
+    z-index: 9;
   }
   .tab-control span{
     padding: 6px;

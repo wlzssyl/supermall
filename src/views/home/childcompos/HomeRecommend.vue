@@ -28,7 +28,7 @@ export default {
     display: flex;
     justify-content: space-around;
     padding: 10px 0 20px;
-    border-bottom: 10px solid #ddd;
+    border-bottom: 10px solid #eee;
   }
   .recommends>div{
     width: 20%;
