@@ -25,6 +25,8 @@ export default {
   methods:{
     isClick(index){
       this.currentIndex = index;
+      //将tabClick事件传给父组件home.vue
+      this.$emit('tabClick',index);
     }
   }
 }

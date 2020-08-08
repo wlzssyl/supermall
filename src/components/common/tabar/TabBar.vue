@@ -21,5 +21,6 @@ export default {
     bottom: 0px;
     background-color: #f5f5f5;
     box-shadow: 0 0 5px rgba(1, 1, 1, 0.2);
+    z-index: 99;
   }
 </style>

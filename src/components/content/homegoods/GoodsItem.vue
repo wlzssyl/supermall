@@ -1,10 +1,12 @@
 <template>
   <div class="goods-item">
-    <img :src="item.show.img" alt="">
-    <div class="item-text">
-      <p>{{item.title}}</p>
-      <span class="price">{{item.orgPrice}}</span>   
-      <span class="collect"><i class="iconfont icon-dianzan2"></i>{{item.cfav}}</span>
+    <div>
+      <img :src="item.show.img" alt="">
+      <div class="item-text">
+        <p>{{item.title}}</p>
+        <span class="price">{{item.orgPrice}}</span>   
+        <span class="collect"><i class="iconfont icon-dianzan2"></i>{{item.cfav}}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -24,18 +26,22 @@ export default {
 
 <style>
   .goods-item{
-    width: 46%;
+    /* 避免瀑布流把元素分割 */
+    -webkit-column-break-inside: avoid;
+    
+    width: 92%;
     background-color: #fff;
     position: relative;
     border-radius: 6px;
-    margin-top: 2vw;
+    margin-bottom: 8px;
+    margin-left: 2vw;
   }
   .goods-item img{
     width: 100%;
     border-radius: 6px 6px 0 0;
   }
   .goods-item .item-text{
-    padding: 0 6px;
+    padding: 0 6px 6px 6px;
   }
   .goods-item p{
     font-size: 14px;

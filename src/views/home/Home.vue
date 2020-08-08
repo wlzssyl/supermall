@@ -6,8 +6,9 @@
     <home-swiper v-bind:probanner="banner"></home-swiper>
     <home-recommend :recommend="recommend"></home-recommend>
     <home-ad></home-ad>
-    <tab-control :name="['流行','新款','精选']"></tab-control>
-    <home-goods :list="goods.pop.list"></home-goods>
+    <tab-control :name="['流行','新款','精选']"
+      @tabClick="tabClick"></tab-control>
+    <home-goods :list="goods[currentType].list"></home-goods>
 
  
   </div>
@@ -40,10 +41,11 @@ export default {
       recommend:[],
       //商品数据
       goods:{
-        pop:{page:0, list:[]},
-        new:{page:0, list:[]},
-        sell:{page:0, list:[]}
-      }
+        'pop':{page:0, list:[]},
+        'new':{page:0, list:[]},
+        'sell':{page:0, list:[]}
+      },
+      currentType:'pop' //记录当前活跃的模块
     }
   },
   created(){
@@ -55,6 +57,26 @@ export default {
     this.MgetHomeGoods('sell');
   },
   methods:{
+    /**
+     * 点击事件函数
+     */
+    tabClick(index) {
+      switch (index) {
+        case 0:
+          this.currentType = 'pop';
+          console.log(index)
+          break;
+        case 1:
+          this.currentType = 'new';
+          break;
+        case 2:
+          this.currentType = 'sell';
+          break;
+      }
+    },
+    /**
+     * 网络请求函数
+     */
     MgetHomeMultidata() {
       getHomeMultidata().then(res => {
         this.results = res;
