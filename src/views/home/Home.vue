@@ -1,14 +1,16 @@
 <template>
   <div id="home">
     <nav-bar class="home-bar">
-      <div slot="center">购物街</div>
+        <div slot="center">购物街</div>
     </nav-bar>
-    <home-swiper v-bind:probanner="banner"></home-swiper>
-    <home-recommend :recommend="recommend"></home-recommend>
-    <home-ad></home-ad>
-    <tab-control :name="['流行','新款','精选']"
-      @tabClick="tabClick"></tab-control>
-    <home-goods :list="goods[currentType].list"></home-goods>
+    <better-scroll class="home-content">
+      <home-swiper v-bind:probanner="banner"></home-swiper>
+      <home-recommend :recommend="recommend"></home-recommend>
+      <home-ad></home-ad>
+      <tab-control :name="['流行','新款','精选']"
+        @tabClick="tabClick"></tab-control>
+      <home-goods :list="goods[currentType].list"></home-goods>
+    </better-scroll>
 
  
   </div>
@@ -22,6 +24,7 @@ import HomeAd from './childcompos/HomeAd'
 import NavBar from 'components/common/navbar/NavBar'
 import TabControl from 'components/content/TabControl'
 import HomeGoods from 'components/content/homegoods/HomeGoods'
+import BetterScroll from 'components/common/BScroll/BetterScroll'
 
 import {getHomeMultidata, getHomeGoods} from 'network/home'
 
@@ -32,7 +35,8 @@ export default {
     HomeAd,
     NavBar,
     TabControl,
-    HomeGoods
+    HomeGoods,
+    BetterScroll
   },
   data(){
     return {
@@ -96,8 +100,21 @@ export default {
 </script>
 
 <style>
+  #home{
+    position: relative;
+    height: 100vh;
+    background-color: #eee;
+  }
   .home-bar{
     background-color: var(--color-tint);
     color: #fff;
+  }
+  .home-content{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 44px;
+    bottom: 49px;
+    overflow: hidden;
   }
 </style>

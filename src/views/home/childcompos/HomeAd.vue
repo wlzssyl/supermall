@@ -15,5 +15,6 @@ export default {
 <style>
   .home-ad img{
     width: 100%;
+    vertical-align: middle;
   }
 </style>
