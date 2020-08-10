@@ -6,7 +6,8 @@
     </nav-bar>
     <!-- 滚动区域 -->
     <better-scroll class="home-content" ref="scroll" 
-      :probe-type="3" @scroll="showToTop">
+      :probe-type="3" @scroll="showToTop"
+      :pull-up-load="true" @loadMore="getNewGoods">
       <home-swiper v-bind:probanner="banner"></home-swiper>
       <home-recommend :recommend="recommend"></home-recommend>
       <home-ad></home-ad>
@@ -91,8 +92,17 @@ export default {
       this.$refs.scroll.scroll.scrollTo(0,0,600);
       //.scrollTo( X, Y , 时间)
     },
+    /**
+     * 监听事件
+     */
     showToTop(position) {
-      -position.y > 1000 ? this.isShowToTop = true:this.isShowToTop;
+      -position.y > 1000 ? this.isShowToTop = true:this.isShowToTop = false;
+    },
+    getNewGoods() {
+      this.MgetHomeGoods(this.currentType);
+
+      //修复better-scroll的原有bug
+      this.$refs.scroll.scroll.refresh();
     },
     /**
      * 网络请求函数
@@ -109,6 +119,10 @@ export default {
       getHomeGoods(type, page).then(res => {
         this.goods[type].list.push(...res.data.data.list);
         //这里的.push(...[]) 解构
+
+        //.finishPullUp方法是scroll对象在上拉加载更多后需要回调的方法
+        //否则加载一次就不会再加载了
+        this.$refs.scroll.scroll.finishPullUp();
       })
     }
   }
