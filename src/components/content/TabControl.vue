@@ -38,7 +38,6 @@ export default {
     justify-content: space-around;
     line-height: 45px;
     background-color: #fff;
-    position: sticky;
     top: 0;
     z-index: 9;
   }
