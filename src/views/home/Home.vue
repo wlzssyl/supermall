@@ -4,15 +4,24 @@
     <nav-bar class="home-bar">
         <div slot="center">购物街</div>
     </nav-bar>
+    <tab-control :name="['流行','新款','精选']"
+      @tabClick="tabClick" ref="tabControl2"
+      class="tab-control2" v-show="isShowTabControl"></tab-control>
     <!-- 滚动区域 -->
     <better-scroll class="home-content" ref="scroll" 
       :probe-type="3" @scroll="showToTop"
       :pull-up-load="true" @loadMore="getNewGoods">
-      <home-swiper v-bind:probanner="banner"></home-swiper>
+
+      <home-swiper v-bind:probanner="banner"
+      @swiperImgLoad="getOffset"></home-swiper>
+
       <home-recommend :recommend="recommend"></home-recommend>
+
       <home-ad></home-ad>
+
       <tab-control :name="['流行','新款','精选']"
-        @tabClick="tabClick"></tab-control>
+        @tabClick="tabClick" ref="tabControl1"></tab-control>
+
       <home-goods :list="goods[currentType].list"></home-goods>
     </better-scroll>
     <!-- 回到顶部按钮 -->
@@ -59,7 +68,9 @@ export default {
         'sell':{page:0, list:[]}
       },
       currentType:'pop', //记录当前活跃的模块
-      isShowToTop:false //回到顶部隐藏和显示
+      isShowToTop:false, //回到顶部隐藏和显示
+      conOffsetTop:0 ,  //tabcontrol距离顶部的距离
+      isShowTabControl:false //tabcontrol显示与隐藏
     }
   },
   mounted() {
@@ -68,7 +79,6 @@ export default {
       //修复better-scroll的bug
       //this.$refs.scroll.refresh();
       refresh();
-      
     })
   },
   created() {
@@ -83,7 +93,7 @@ export default {
     /**
      * 点击事件函数
      */
-    tabClick(index) {
+    tabClick(index) {//
       switch (index) {
         case 0:
           this.currentType = 'pop';
@@ -95,6 +105,12 @@ export default {
           this.currentType = 'sell';
           break;
       }
+      //将两个tabcontrol的currentIndex设置一致
+      this.$refs.tabControl1.currentIndex = index;
+      this.$refs.tabControl2.currentIndex = index;
+    },
+    getOffset() {//获取tabcontrol的位置
+      this.conOffsetTop = this.$refs.tabControl1.$el.offsetTop;
     },
     toTop() {
       //this.$refs.scroll拿到scroll组件，
@@ -106,7 +122,11 @@ export default {
      * 监听事件
      */
     showToTop(position) {
+      //控制回到顶部按钮显示与隐藏 1000px
       -position.y > 1000 ? this.isShowToTop = true:this.isShowToTop = false;
+
+      //控制tabcontrol2显示与隐藏
+      -position.y > this.conOffsetTop ? this.isShowTabControl = true:this.isShowTabControl = false;
     },
     getNewGoods() {
       this.MgetHomeGoods(this.currentType);
@@ -156,5 +176,8 @@ export default {
     top: 44px;
     bottom: 49px;
     overflow: hidden;
+  }
+  .tab-control2{
+    position: relative;
   }
 </style>
