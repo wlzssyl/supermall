@@ -35,9 +35,19 @@ export default {
     this.scroll.on('scroll',(position) => {//监测滚动到哪个位置
       this.$emit('scroll',position);
     });
-    this.scroll.on('pullingUp',() => {//上拉加载更多
+    if(this.pullUpLoad == true){
+      this.scroll.on('pullingUp',() => {//上拉加载更多
       this.$emit('loadMore');
     })
+    }
+
+  },
+  methods:{
+    refresh() {
+      if(this.scroll)
+      this.scroll.refresh();
+      console.log(123)
+    }
   }
 }
 </script>

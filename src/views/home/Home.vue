@@ -34,6 +34,7 @@ import BetterScroll from 'components/common/BScroll/BetterScroll'
 import BackTop from 'components/content/backtop/BackTop'
 
 import {getHomeMultidata, getHomeGoods} from 'network/home'
+import {debounce} from 'common/utils'
 
 export default {
   components:{
@@ -61,7 +62,16 @@ export default {
       isShowToTop:false //回到顶部隐藏和显示
     }
   },
-  created(){
+  mounted() {
+    const refresh = debounce(this.$refs.scroll.refresh,100);
+    this.$bus.$on('itemLoad', () => {
+      //修复better-scroll的bug
+      //this.$refs.scroll.refresh();
+      refresh();
+      
+    })
+  },
+  created() {
     //获取home页主要数据
     this.MgetHomeMultidata();
     //获取home页商品数据
@@ -102,7 +112,7 @@ export default {
       this.MgetHomeGoods(this.currentType);
 
       //修复better-scroll的原有bug
-      this.$refs.scroll.scroll.refresh();
+      //this.$refs.scroll.scroll.refresh();
     },
     /**
      * 网络请求函数
