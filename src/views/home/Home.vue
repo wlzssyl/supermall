@@ -70,7 +70,8 @@ export default {
       currentType:'pop', //记录当前活跃的模块
       isShowToTop:false, //回到顶部隐藏和显示
       conOffsetTop:0 ,  //tabcontrol距离顶部的距离
-      isShowTabControl:false //tabcontrol显示与隐藏
+      isShowTabControl:false, //tabcontrol显示与隐藏
+      activatedY:0   //离开时位置
     }
   },
   mounted() {
@@ -88,6 +89,15 @@ export default {
     this.MgetHomeGoods('pop');
     this.MgetHomeGoods('new');
     this.MgetHomeGoods('sell');
+  },
+  activated() {
+    //回到离开时位置
+    this.$refs.scroll.scroll.scrollTo(0, this.activatedY, 0);
+  },
+  deactivated() {
+    //记录离开位置
+    this.activatedY = this.$refs.scroll.scroll.y;
+    console.log(this.$refs.scroll.scroll.y);
   },
   methods:{
     /**
