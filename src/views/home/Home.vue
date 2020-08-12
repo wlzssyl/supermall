@@ -92,12 +92,12 @@ export default {
   },
   activated() {
     //回到离开时位置
-    this.$refs.scroll.scroll.scrollTo(0, this.activatedY, 0);
+    this.$refs.scroll.scroll.refresh();
+    this.$refs.scroll.scroll.scrollTo(0, this.activatedY, 0); 
   },
   deactivated() {
     //记录离开位置
     this.activatedY = this.$refs.scroll.scroll.y;
-    console.log(this.$refs.scroll.scroll.y);
   },
   methods:{
     /**

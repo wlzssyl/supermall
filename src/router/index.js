@@ -5,6 +5,7 @@ const Home = ()=> import('views/home/Home')
 const Category = ()=> import('views/category/Category')
 const Cart = ()=> import('views/cart/Cart')
 const Profile = ()=>import ('views/profile/Profile')
+const Details = ()=>import ('views/details/Details')
 
 /**解决重复路由的报错，即重复点*************************/
 const originalPush = Router.prototype.push
@@ -36,6 +37,10 @@ const router = new Router({
     {
       path:'/profile',
       component:Profile
+    },
+    {
+      path:'/details/:iid',
+      component:Details
     }
   ],
   mode:'history'
