@@ -32,7 +32,7 @@ export default {
     this.id = this.$route.params.iid;
     //获取该id的数据
     getDetailsData(this.id).then((res) => {
-      console.log(res);
+      //console.log(res);
       //1.保存轮播图数据
       this.topImgArray = res.data.result.itemInfo.topImages;
 

@@ -8,6 +8,7 @@
         <span class="collect"><i class="iconfont icon-dianzan2"></i>{{item.cfav}}</span>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -35,17 +36,17 @@ export default {
 <style>
   .goods-item{
     /* 避免瀑布流把元素分割 */
-    -webkit-column-break-inside: avoid;
-    
-    width: 92%;
+    /* -webkit-column-break-inside: avoid; */
+    width: 46%;
     background-color: #fff;
     position: relative;
     border-radius: 6px;
     margin-bottom: 8px;
-    margin-left: 2vw;
+    margin-left: 1vw;
   }
   .goods-item img{
     width: 100%;
+    height: 300px;
     border-radius: 6px 6px 0 0;
   }
   .goods-item .item-text{

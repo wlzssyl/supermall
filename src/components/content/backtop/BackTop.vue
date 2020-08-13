@@ -13,7 +13,7 @@ export default {
 <style>
   .back-top img{
     position: absolute;
-    bottom: 50px;
+    bottom: 60px;
     right: 10px;
     width: 54px;
   }

@@ -2,7 +2,7 @@
   <div>
     <div class="goods-before"></div>
     <div class="goods-list">
-      <goods-item v-for="(value,index) in list" :key="index"
+      <goods-item v-for="(value,index) in list" :key="'id'+index"
         :item="value"></goods-item>
     </div>
   </div>
@@ -10,6 +10,7 @@
 
 <script>
 import GoodsItem from './GoodsItem'
+
 
 export default {
   components:{
@@ -29,11 +30,13 @@ export default {
 <style>
   .goods-list{
     /* 使用colum-count瀑布流 */
-    column-count: 2;
-    column-gap: 0;
+    /* column-count: 2;
+    column-gap: 0; */
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     width: 100%;
     background-color: #eee;
-    padding: 0 0px 0;
   }
   .goods-before{
     height: 8px;
