@@ -1,7 +1,7 @@
 <template>
   <div>
     <swiper  class="top-img-swiper">
-      <swiper-item v-for="(value,index) in topImg" :key="index"
+      <swiper-item v-for="value in topImg" :key="value"
       >
         <img v-bind:src=value alt="">
       </swiper-item>

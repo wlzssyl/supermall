@@ -41,13 +41,14 @@ export default {
 <style>
   .bar-center{
     display: flex;
+    justify-content: space-around;
   }
   .center-items{
     padding: 0 10px;
     font-size: 14px;
   }
   .active{
-    color: var(--color-high-text);
+    color: var(--color-tint);
   }
   .bar-left{
     margin: 0 0 0 20px;
