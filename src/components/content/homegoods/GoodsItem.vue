@@ -46,7 +46,7 @@ export default {
   }
   .goods-item img{
     width: 100%;
-    height: 300px;
+    height: 40vh;
     border-radius: 6px 6px 0 0;
   }
   .goods-item .item-text{

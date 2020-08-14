@@ -17,7 +17,7 @@ export default {
     },
     pullUpLoad:{
       type:Boolean,
-      default:'false'
+      default:false
     }
   },
   data() {

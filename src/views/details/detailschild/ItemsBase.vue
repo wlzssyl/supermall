@@ -5,7 +5,8 @@
       <p>
         <span class="new-price">{{itemBaseInfo.newPrice}}</span>
         <span class="old-price">{{itemBaseInfo.oldPrice}}</span>
-        <span class="item-discount">{{itemBaseInfo.discount}}</span>
+        <span class="item-discount" v-if="Object.keys(itemBaseInfo.discount).length != 0">
+          {{itemBaseInfo.discount}}</span>
       </p>
     </div>
     <div class="item-numInfo">
@@ -14,7 +15,7 @@
       <span>{{itemBaseInfo.services[0].name}}</span>
     </div>
     <div class="item-services">
-      <span v-for="value in itemBaseInfo.services.length-1" :key="value">
+      <span v-for="value in itemBaseInfo.services.length-1" :key="value" class="serices-span">
         <img :src="itemBaseInfo.services[value].icon" alt="">
         <span>{{itemBaseInfo.services[value].name}}</span>
       </span>
@@ -76,7 +77,7 @@ export default {
     display: flex;
     justify-content: space-between;
     margin: 0 12px;
-    border-bottom: solid 1px #ddd;
+    border-bottom: solid 3px #ddd;
     border-top: solid 1px #ddd;
     padding: 16px 0;
   }
