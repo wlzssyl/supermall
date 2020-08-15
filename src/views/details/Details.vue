@@ -9,6 +9,7 @@
       <details-image :detail-image="detailImage" 
         :detail-desc="detailDesc" @scrollRefresh="scRrefresh"></details-image>
       <detail-params :param-info="paramInfo"></detail-params>
+      <detail-comment :comment="itemComment"></detail-comment>
     </better-scroll>
   </div>
 </template>
@@ -20,6 +21,7 @@ import ItemsBase from './detailschild/ItemsBase'
 import DetailsShop from './detailschild/DetailsShop'
 import DetailsImage from './detailschild/DetalisImage'
 import DetailParams from './detailschild/DetailParams'
+import DetailComment from "./detailschild/DetailComment.vue"
 
 import BetterScroll from 'components/common/BScroll/BetterScroll'
 
@@ -34,6 +36,7 @@ export default {
     DetailsShop,
     DetailsImage,
     DetailParams,
+    DetailComment,
     BetterScroll
   },
   data() {
@@ -44,7 +47,8 @@ export default {
       shopInfos:{} , //店家信息
       detailImage:[],  //商品详情图片
       detailDesc:[],  //商品说明
-      paramInfo:{} //商品参数
+      paramInfo:{}, //商品参数
+      itemComment:{}    //评论
     }
   },
   created() {
@@ -72,7 +76,11 @@ export default {
       this.paramInfo = new GoodsParam(
         res.data.result.itemParams.info,
         res.data.result.itemParams.rule,
-      )
+      );
+      //6.保存商品评论数据
+      if(res.data.result.rate.cRate !== 0){
+        this.itemComment = res.data.result.rate.list[0];
+      }
     }).catch((err) => {});
   },
   methods:{
