@@ -8,6 +8,7 @@
       <details-shop :shop-info="shopInfos"></details-shop>
       <details-image :detail-image="detailImage" 
         :detail-desc="detailDesc" @scrollRefresh="scRrefresh"></details-image>
+      <detail-params :param-info="paramInfo"></detail-params>
     </better-scroll>
   </div>
 </template>
@@ -18,10 +19,11 @@ import DetailSwiper from './detailschild/DetailsSwiper'
 import ItemsBase from './detailschild/ItemsBase'
 import DetailsShop from './detailschild/DetailsShop'
 import DetailsImage from './detailschild/DetalisImage'
+import DetailParams from './detailschild/DetailParams'
 
 import BetterScroll from 'components/common/BScroll/BetterScroll'
 
-import {getDetailsData, Goods, Shop} from 'network/details'
+import {getDetailsData, Goods, Shop, GoodsParam} from 'network/details'
 
 export default {
   name:'Details',
@@ -31,6 +33,7 @@ export default {
     ItemsBase,
     DetailsShop,
     DetailsImage,
+    DetailParams,
     BetterScroll
   },
   data() {
@@ -40,7 +43,8 @@ export default {
       itemBaseInfo:{},  //商品基本信息
       shopInfos:{} , //店家信息
       detailImage:[],  //商品详情图片
-      detailDesc:[]  //商品说明
+      detailDesc:[],  //商品说明
+      paramInfo:{} //商品参数
     }
   },
   created() {
@@ -63,6 +67,12 @@ export default {
       this.detailImage = res.data.result.detailInfo.detailImage[0].list;
       this.detailDesc[0] = res.data.result.detailInfo.desc;
       this.detailDesc[1] = res.data.result.detailInfo.detailImage[0].key;
+
+      //5.保存商品参数信息
+      this.paramInfo = new GoodsParam(
+        res.data.result.itemParams.info,
+        res.data.result.itemParams.rule,
+      )
     }).catch((err) => {});
   },
   methods:{
