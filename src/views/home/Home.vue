@@ -44,8 +44,11 @@ import BackTop from 'components/content/backtop/BackTop'
 
 import {getHomeMultidata, getHomeGoods} from 'network/home'
 import {debounce} from 'common/utils'
+import { mixinTop } from 'common/mixin'
 
 export default {
+  //混入mixins
+  mixins: [mixinTop],
   components:{
     HomeSwiper,
     HomeRecommend,
@@ -122,12 +125,12 @@ export default {
     getOffset() {//获取tabcontrol的位置
       this.conOffsetTop = this.$refs.tabControl1.$el.offsetTop;
     },
-    toTop() {
-      //this.$refs.scroll拿到scroll组件，
-      //然后调用组件中betterscroll对象的.scrollTo()方法
-      this.$refs.scroll.scroll.scrollTo(0,0,600);
-      //.scrollTo( X, Y , 时间)
-    },
+    // toTop() {
+    //   //this.$refs.scroll拿到scroll组件，
+    //   //然后调用组件中betterscroll对象的.scrollTo()方法
+    //   this.$refs.scroll.scroll.scrollTo(0,0,600);
+    //   //.scrollTo( X, Y , 时间)
+    // },
     /**
      * 监听事件
      */

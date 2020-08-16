@@ -12,6 +12,7 @@
       <detail-comment :comment="itemComment"></detail-comment>
       <home-goods :list="itemRecommend"></home-goods>
     </better-scroll>
+    <back-top @click.native="toTop"></back-top>
   </div>
 </template>
 
@@ -23,14 +24,18 @@ import DetailsShop from './detailschild/DetailsShop'
 import DetailsImage from './detailschild/DetalisImage'
 import DetailParams from './detailschild/DetailParams'
 import DetailComment from "./detailschild/DetailComment.vue"
+import BackTop from 'components/content/backtop/BackTop'
 
 import HomeGoods from 'components/content/homegoods/HomeGoods'
 import BetterScroll from 'components/common/BScroll/BetterScroll'
 
 import {getDetailsData, getRecommend, Goods, Shop, GoodsParam} from 'network/details'
+import { mixinTop } from 'common/mixin'
 
 export default {
   name:'Details',
+  //混入mixins
+  mixins: [mixinTop],
   components:{
     TopBar,
     DetailSwiper,
@@ -40,6 +45,7 @@ export default {
     DetailParams,
     DetailComment,
     HomeGoods,
+    BackTop,
     BetterScroll
   },
   data() {
@@ -88,12 +94,12 @@ export default {
     }).catch((err) => {});
     //获取推荐商品数据
     getRecommend().then(res => {
-            console.log(res)
+      //console.log(res)
       this.itemRecommend = res.data.data.list;
     }).catch(err => {})
   },
   methods:{
-    scRrefresh(){
+    scRrefresh() {
       this.$refs.scroll.scroll.refresh();
     }
   }
