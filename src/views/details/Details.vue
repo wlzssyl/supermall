@@ -10,6 +10,7 @@
         :detail-desc="detailDesc" @scrollRefresh="scRrefresh"></details-image>
       <detail-params :param-info="paramInfo"></detail-params>
       <detail-comment :comment="itemComment"></detail-comment>
+      <home-goods :list="itemRecommend"></home-goods>
     </better-scroll>
   </div>
 </template>
@@ -23,9 +24,10 @@ import DetailsImage from './detailschild/DetalisImage'
 import DetailParams from './detailschild/DetailParams'
 import DetailComment from "./detailschild/DetailComment.vue"
 
+import HomeGoods from 'components/content/homegoods/HomeGoods'
 import BetterScroll from 'components/common/BScroll/BetterScroll'
 
-import {getDetailsData, Goods, Shop, GoodsParam} from 'network/details'
+import {getDetailsData, getRecommend, Goods, Shop, GoodsParam} from 'network/details'
 
 export default {
   name:'Details',
@@ -37,6 +39,7 @@ export default {
     DetailsImage,
     DetailParams,
     DetailComment,
+    HomeGoods,
     BetterScroll
   },
   data() {
@@ -48,7 +51,8 @@ export default {
       detailImage:[],  //商品详情图片
       detailDesc:[],  //商品说明
       paramInfo:{}, //商品参数
-      itemComment:{}    //评论
+      itemComment:{},    //评论
+      itemRecommend:[],  //商品推荐
     }
   },
   created() {
@@ -56,7 +60,7 @@ export default {
     this.id = this.$route.params.iid;
     //获取该id的数据
     getDetailsData(this.id).then((res) => {
-      console.log(res);
+      //console.log(res);
       //1.保存轮播图数据
       this.topImgArray = res.data.result.itemInfo.topImages;
 
@@ -82,6 +86,11 @@ export default {
         this.itemComment = res.data.result.rate.list[0];
       }
     }).catch((err) => {});
+    //获取推荐商品数据
+    getRecommend().then(res => {
+            console.log(res)
+      this.itemRecommend = res.data.data.list;
+    }).catch(err => {})
   },
   methods:{
     scRrefresh(){

@@ -1,10 +1,10 @@
 <template>
   <div class="goods-item" @click="itemClick">
     <div>
-      <img :src="item.show.img" alt="" @load="imgLoad">
+      <img :src="showImage" alt="" @load="imgLoad">
       <div class="item-text">
         <p>{{item.title}}</p>
-        <span class="price">{{item.orgPrice}}</span>   
+        <span class="price">{{showPrice}}</span>   
         <span class="collect"><i class="iconfont icon-dianzan2"></i>{{item.cfav}}</span>
       </div>
     </div>
@@ -14,6 +14,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isDetail:false
+    }
+  },
   props:{
     item:{
       type:Object,
@@ -27,7 +32,30 @@ export default {
       this.$bus.$emit('itemLoad');
     },
     itemClick() {
-      this.$router.push('/details/'+this.item.iid);
+      if(this.isDetail == true){
+         
+      }else{
+        this.$router.push('/details/'+this.item.iid);
+      }
+    }
+  },
+  computed:{
+    showImage() {
+      if(this.item.image){
+        this.isDetail = true;
+        return this.item.image;
+      }
+      else{
+        this.isDetail = false
+        return this.item.show.img;
+      }
+    },
+    showPrice() {
+      if(this.isDetail == true){
+        return '￥'+this.item.price
+      }else{
+        return this.item.orgPrice
+      }
     }
   }
 }
