@@ -1,8 +1,9 @@
 <template>
   <div class="detail-page">
-    <top-bar class="detail-topbar" @themeTo="themeClick"></top-bar>
+    <top-bar class="detail-topbar" @themeTo="themeClick" ref="topbar"></top-bar>
     <!-- betterscroll滚动 -->
-    <better-scroll class="detail-content" ref="scroll">
+    <better-scroll class="detail-content" ref="scroll" 
+      :probeType=3 @scroll="scrollPosition">
       <detail-swiper :top-img="topImgArray"></detail-swiper>
       <items-base :item-base-info="itemBaseInfo"></items-base>
       <details-shop :shop-info="shopInfos"></details-shop>
@@ -59,7 +60,8 @@ export default {
       paramInfo:{}, //商品参数
       itemComment:{},    //评论
       itemRecommend:[],  //商品推荐
-      themeOffsetTop: [] //导航栏顶部距离保存
+      themeOffsetTop: [], //导航栏顶部距离保存
+      navCurrentIndex: 0  //顶部导航栏索引
     }
   },
   created() {
@@ -109,8 +111,24 @@ export default {
       this.themeOffsetTop.push(this.$refs.recommend.$el.offsetTop);
     },
     themeClick(index) {
+      //console.log(-this.themeOffsetTop[index]+45);
       //点击导航栏滚动到响应位置
-      this.$refs.scroll.scroll.scrollTo(0, -this.themeOffsetTop[index]+44, 1000);
+      this.$refs.scroll.scroll.scrollTo(0, -this.themeOffsetTop[index]+45, 1000);
+    },
+    scrollPosition(position) {//监听scroll滚动位置
+      const positionY = position.y;
+      const length = this.themeOffsetTop.length;  
+      for(let i=0;i<length;i++){
+        if(
+        i != this.navCurrentIndex
+        && ((i < length-1) && (positionY <= -this.themeOffsetTop[i]+45 && positionY > -this.themeOffsetTop[i+1]+45)
+        || (i == length-1) && (positionY <= -this.themeOffsetTop[i]+45)
+        )){
+          this.navCurrentIndex = i;
+          //console.log(i)
+          this.$refs.topbar.currentIndex = i;
+        }
+      }
     }
   }
 }
