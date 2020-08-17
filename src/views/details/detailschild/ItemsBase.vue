@@ -5,8 +5,8 @@
       <p>
         <span class="new-price">{{itemBaseInfo.newPrice}}</span>
         <span class="old-price">{{itemBaseInfo.oldPrice}}</span>
-        <span class="item-discount" v-if="Object.keys(itemBaseInfo.discount).length != 0">
-          {{itemBaseInfo.discount}}</span>
+        <span class="item-discount" v-if="Object.keys(itemBaseInfo.discount).length != 0">{{itemBaseInfo.discount}}
+        </span>
       </p>
     </div>
     <div class="item-numInfo">
@@ -63,6 +63,7 @@ export default {
     background-color: var(--color-high-text);
     vertical-align: top;
     padding: 3px;
+    text-align: center;
     border-radius: 10px;
   }
   .item-numInfo{

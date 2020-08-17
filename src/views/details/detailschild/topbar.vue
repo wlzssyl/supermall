@@ -28,7 +28,8 @@ export default {
   },
   methods:{
     isActive(index) {
-      this.currentIndex = index
+      this.currentIndex = index;
+      this.$emit('themeTo',index);
     },
     backHome() {
       this.$router.back();

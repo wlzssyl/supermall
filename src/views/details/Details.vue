@@ -1,6 +1,6 @@
 <template>
   <div class="detail-page">
-    <top-bar class="detail-topbar"></top-bar>
+    <top-bar class="detail-topbar" @themeTo="themeClick"></top-bar>
     <!-- betterscroll滚动 -->
     <better-scroll class="detail-content" ref="scroll">
       <detail-swiper :top-img="topImgArray"></detail-swiper>
@@ -8,9 +8,9 @@
       <details-shop :shop-info="shopInfos"></details-shop>
       <details-image :detail-image="detailImage" 
         :detail-desc="detailDesc" @scrollRefresh="scRrefresh"></details-image>
-      <detail-params :param-info="paramInfo"></detail-params>
-      <detail-comment :comment="itemComment"></detail-comment>
-      <home-goods :list="itemRecommend"></home-goods>
+      <detail-params ref="params" :param-info="paramInfo"></detail-params>
+      <detail-comment ref="comment" :comment="itemComment"></detail-comment>
+      <home-goods ref="recommend" :list="itemRecommend"></home-goods>
     </better-scroll>
     <back-top @click.native="toTop"></back-top>
   </div>
@@ -59,6 +59,7 @@ export default {
       paramInfo:{}, //商品参数
       itemComment:{},    //评论
       itemRecommend:[],  //商品推荐
+      themeOffsetTop: [] //导航栏顶部距离保存
     }
   },
   created() {
@@ -99,8 +100,17 @@ export default {
     }).catch(err => {})
   },
   methods:{
-    scRrefresh() {
+    scRrefresh() {//调用这里说明图片已经加载完了
       this.$refs.scroll.scroll.refresh();
+      //获取offsetTop
+      this.themeOffsetTop.push(this.$refs.scroll.$el.offsetTop);
+      this.themeOffsetTop.push(this.$refs.params.$el.offsetTop);
+      this.themeOffsetTop.push(this.$refs.comment.$el.offsetTop);
+      this.themeOffsetTop.push(this.$refs.recommend.$el.offsetTop);
+    },
+    themeClick(index) {
+      //点击导航栏滚动到响应位置
+      this.$refs.scroll.scroll.scrollTo(0, -this.themeOffsetTop[index]+44, 1000);
     }
   }
 }
