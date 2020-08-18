@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
 
+import VueWechatTitle from 'vue-wechat-title'
+Vue.use(VueWechatTitle);
+
 Vue.config.productionTip = false
 
 Vue.prototype.$bus = new Vue();

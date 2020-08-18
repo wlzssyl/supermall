@@ -24,23 +24,38 @@ const router = new Router({
     },
     {
       path:'/home',
-      component:Home
+      component:Home,
+      meta:{
+        title:'首页' // 页面标题，需要安装vue-wechat-title
+      }
     },
     {
       path:'/category',
-      component:Category
+      component:Category,
+      meta:{
+        title:'分类'
+      }
     },
     {
       path:'/cart',
-      component:Cart
+      component:Cart,
+      meta:{
+        title:'购物车'
+      }
     },
     {
       path:'/profile',
-      component:Profile
+      component:Profile,
+      meta:{
+        title:'我的主页'
+      }
     },
     {
       path:'/details/:iid',
-      component:Details
+      component:Details,
+      meta:{
+        title:'商品详情'
+      }
     }
   ],
   mode:'history'
