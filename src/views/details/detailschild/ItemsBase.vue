@@ -1,5 +1,5 @@
 <template>
-  <div v-if="Object.keys(itemBaseInfo).length !== 0">
+  <div v-if="Object.keys(itemBaseInfo).length !== 0" class="details-item-base">
     <div class="item-title-price">
       <p class="items-title">{{itemBaseInfo.title}}</p>
       <p>
@@ -38,6 +38,9 @@ export default {
 </script>
 
 <style>
+  .details-item-base{
+    background-color: #fff;
+  }
   .item-title-price{
     padding: 16px 12px 12px 12px;
     

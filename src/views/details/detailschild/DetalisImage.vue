@@ -45,6 +45,7 @@ export default {
 <style>
   .detali-image{
     margin: 0 12px;
+    background-color: #fff;
   }
   .det-image{
     width: 100%;

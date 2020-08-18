@@ -60,6 +60,7 @@ export default {
   .shop-infos{
     padding-bottom: 22px;
     border-bottom: solid 3px #ddd;
+    background-color: #fff;
   }
 /* 店家头像和id */
   .shop-logo-name{

@@ -13,6 +13,7 @@
       <detail-comment ref="comment" :comment="itemComment"></detail-comment>
       <home-goods ref="recommend" :list="itemRecommend"></home-goods>
     </better-scroll>
+    <details-bottom-bar></details-bottom-bar>
     <back-top @click.native="toTop"></back-top>
   </div>
 </template>
@@ -25,10 +26,11 @@ import DetailsShop from './detailschild/DetailsShop'
 import DetailsImage from './detailschild/DetalisImage'
 import DetailParams from './detailschild/DetailParams'
 import DetailComment from "./detailschild/DetailComment.vue"
-import BackTop from 'components/content/backtop/BackTop'
+import DetailsBottomBar from './detailschild/DetailsBottomBar'
 
 import HomeGoods from 'components/content/homegoods/HomeGoods'
 import BetterScroll from 'components/common/BScroll/BetterScroll'
+import BackTop from 'components/content/backtop/BackTop'
 
 import {getDetailsData, getRecommend, Goods, Shop, GoodsParam} from 'network/details'
 import { mixinTop } from 'common/mixin'
@@ -45,9 +47,10 @@ export default {
     DetailsImage,
     DetailParams,
     DetailComment,
+    DetailsBottomBar,
     HomeGoods,
-    BackTop,
-    BetterScroll
+    BetterScroll,
+    BackTop
   },
   data() {
     return {
@@ -146,6 +149,6 @@ export default {
     background-color: #fff;
   }
   .detail-content{
-    height: calc(100vh - 44px);
+    height: calc(100vh - 44px - 59px);
   }
 </style>
