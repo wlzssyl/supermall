@@ -6,6 +6,11 @@ export const mixinTop = {
       this.$refs.scroll.scroll.scrollTo(0,0,600);
       //.scrollTo( X, Y , 时间)
     }
+  },
+  data() {
+    return {
+      isShowToTop:false
+    }
   }
 }
 /**

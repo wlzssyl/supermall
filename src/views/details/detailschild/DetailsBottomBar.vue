@@ -12,14 +12,18 @@
       <i class="iconfont icon-shop"></i>
       <p>店铺</p>
     </div>
-    <div class="add-to-cart">加入购物车</div>
+    <div class="add-to-cart" @click="addToCart">加入购物车</div>
     <div class="buy-item">购买</div>
   </div>
 </template>
 
 <script>
 export default {
-
+  methods:{
+    addToCart() {
+      this.$emit('addToCart');
+    }
+  }
 }
 </script>
 

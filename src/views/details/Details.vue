@@ -13,8 +13,8 @@
       <detail-comment ref="comment" :comment="itemComment"></detail-comment>
       <home-goods ref="recommend" :list="itemRecommend"></home-goods>
     </better-scroll>
-    <details-bottom-bar></details-bottom-bar>
-    <back-top @click.native="toTop"></back-top>
+    <details-bottom-bar @addToCart="addToCart"></details-bottom-bar>
+    <back-top @click.native="toTop" v-show="isShowToTop"></back-top>
   </div>
 </template>
 
@@ -39,6 +39,7 @@ export default {
   name:'Details',
   //混入mixins
   mixins: [mixinTop],
+
   components:{
     TopBar,
     DetailSwiper,
@@ -132,6 +133,20 @@ export default {
           this.$refs.topbar.currentIndex = i;
         }
       }
+      //totop的显示与隐藏
+      -positionY > 1000 ? this.isShowToTop = true:this.isShowToTop = false;
+    },
+    //将商品信息送到store中（vuex），以便购物车页面展示
+    addToCart() {
+      const product = {}
+      product.image = this.topImgArray[0];
+      product.title = this.itemBaseInfo.title;
+      product.desc = this.itemBaseInfo.desc;
+      product.price = this.itemBaseInfo.realPrice;
+      product.id = this.id;
+      product.count = 0;
+      //将数据提交给vuex
+      this.$store.commit('addCart', product);
     }
   }
 }
