@@ -26,7 +26,7 @@ const router = new Router({
       path:'/home',
       component:Home,
       meta:{
-        title:'首页' // 页面标题，需要安装vue-wechat-title
+        title:'首页' // 页面标题
       }
     },
     {

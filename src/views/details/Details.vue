@@ -146,7 +146,7 @@ export default {
       product.id = this.id;
       product.count = 0;
       //将数据提交给vuex
-      this.$store.commit('addCart', product);
+      this.$store.dispatch('addCart', product);
     }
   }
 }

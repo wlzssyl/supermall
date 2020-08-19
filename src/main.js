@@ -3,9 +3,6 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
 
-import VueWechatTitle from 'vue-wechat-title'
-Vue.use(VueWechatTitle);
-
 Vue.config.productionTip = false
 
 Vue.prototype.$bus = new Vue();
@@ -15,3 +12,11 @@ new Vue({
   router,
   store
 }).$mount('#app')
+
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
+})
