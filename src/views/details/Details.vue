@@ -165,5 +165,6 @@ export default {
   }
   .detail-content{
     height: calc(100vh - 44px - 59px);
+    overflow: hidden;
   }
 </style>
