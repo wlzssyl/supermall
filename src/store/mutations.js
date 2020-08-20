@@ -3,6 +3,7 @@ export default {
     payload.count++;
   },
   addProduct(state, payload) {  
+    payload.isCheck = false; //为商品添加是否选择 属性
     state.cartList.push(payload);
   }
 

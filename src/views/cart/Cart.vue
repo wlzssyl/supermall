@@ -3,7 +3,7 @@
     <nav-bar class="cart-topbar">
       <div slot="center">购物车({{cartListLength}})</div>
     </nav-bar>
-    <better-scroll class="cart-content">
+    <better-scroll class="cart-content" ref="scroll">
       <cart-list></cart-list>
     </better-scroll>  
   </div>
@@ -28,6 +28,9 @@ export default {
       'cartListLength',
     ])//2.对象使用方法,可以再起个名字
      // ...mapGetters({length:'cartListLength'})
+  },
+  activated() {
+    this.$refs.scroll.scroll.refresh();
   }
 }
 </script>
