@@ -146,7 +146,12 @@ export default {
       product.id = this.id;
       product.count = 0;
       //将数据提交给vuex
-      this.$store.dispatch('addCart', product);
+      this.$store.dispatch('addCart', product).then(res => {
+        console.log(res);
+      })
+      /*上面代码是actions中返回的promise对象，通过promise可以获得actions做的操作
+        注意 ： actions和getters一样也有mapActions映射，省去写$store。。。
+      */
     }
   }
 }
