@@ -15,6 +15,7 @@
     </better-scroll>
     <details-bottom-bar @addToCart="addToCart"></details-bottom-bar>
     <back-top @click.native="toTop" v-show="isShowToTop"></back-top>
+    <toast ref="toast"/>
   </div>
 </template>
 
@@ -35,6 +36,8 @@ import BackTop from 'components/content/backtop/BackTop'
 import {getDetailsData, getRecommend, Goods, Shop, GoodsParam} from 'network/details'
 import { mixinTop } from 'common/mixin'
 
+import Toast from 'components/common/toast/Toast'
+
 export default {
   name:'Details',
   //混入mixins
@@ -51,7 +54,8 @@ export default {
     DetailsBottomBar,
     HomeGoods,
     BetterScroll,
-    BackTop
+    BackTop,
+    Toast
   },
   data() {
     return {
@@ -147,7 +151,10 @@ export default {
       product.count = 0;
       //将数据提交给vuex
       this.$store.dispatch('addCart', product).then(res => {
-        console.log(res);
+        //console.log(res);
+        //console.log(this.$toast)
+        //this.$toast.methods.show(res, 2000)
+        this.$refs.toast.show(res, 2000);
       })
       /*上面代码是actions中返回的promise对象，通过promise可以获得actions做的操作
         注意 ： actions和getters一样也有mapActions映射，省去写$store。。。
