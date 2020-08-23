@@ -61,5 +61,13 @@ const router = new Router({
   mode:'history'
 })
 
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
+})
+
 //导出路由
 export default router

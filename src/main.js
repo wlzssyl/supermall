@@ -2,12 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
+import VueLazyload from 'vue-lazyload'
 
 import toast from 'components/common/toast/index'
 
 Vue.config.productionTip = false
 
 Vue.use(toast);
+Vue.use(VueLazyload,{
+  loading: require('./assets/img/loading.gif')
+});
 
 Vue.prototype.$bus = new Vue();
 
@@ -16,11 +20,3 @@ new Vue({
   router,
   store
 }).$mount('#app')
-
-router.beforeEach((to, from, next) => {
-  /* 路由发生变化修改页面title */
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
-  next()
-})
