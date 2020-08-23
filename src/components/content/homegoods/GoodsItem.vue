@@ -34,6 +34,7 @@ export default {
     itemClick() {
       if(this.isDetail == true){
          //是详情页内的商品列表
+         
       }else{
         this.$router.push('/details/'+this.item.iid);
       }

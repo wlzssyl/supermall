@@ -3,7 +3,7 @@
     <div class="cart-item-info" v-for="(value,index) in product" :key="index+'cart'">
       <cart-check @click.native="isSelected(value)"
         :is-check="value.isCheck"></cart-check>
-      <div class="item-image">
+      <div class="item-image" @click="infoClick(value)">
         <img :src="value.image" alt="">
       </div>
       <div class="item_info" @click="infoClick(value)">
@@ -37,7 +37,8 @@ export default {
   },
   methods:{
     infoClick(value) {
-      console.log(112)
+      console.log(value)
+      this.$router.push('details/'+value.id)
     },
     isSelected(value) {
       value.isCheck = !value.isCheck;
