@@ -1,19 +1,21 @@
-# supermall
+# 购物街
 
-## Project setup
+##### 基于vue.js的web商城
+
+---
+
+### 项目安装
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 搭建本地服务开发
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 打包
 ```
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
